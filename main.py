@@ -5,6 +5,7 @@
 # License -> https://github.com/FayasNoushad/Translator-Bot/blob/main/LICENSE
 
 import os
+from io import BytesIO
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from googletrans import Translator
