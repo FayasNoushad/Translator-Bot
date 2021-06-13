@@ -71,6 +71,7 @@ TRANSLATE_BUTTON = InlineKeyboardMarkup(
         InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
         ]]
     )
+DEFAULT_LANGUAGE = os.environ.get("DEFAULT_LANGUAGE", "en")
 
 @FayasNoushad.on_callback_query()
 async def cb_data(bot, update):
@@ -106,22 +107,20 @@ async def start(bot, update):
         reply_markup=reply_markup
     )
 
-@FayasNoushad.on_message((filters.private | filters.group) & filters.text)
+@FayasNoushad.on_message((filters.private | filters.group | ~filters.channel) & filters.text)
 async def translate(bot, update):
     if update.chat.type == "private":
         if " | " in update.text:
             text, language = update.text.split(" | ", 1)
         else:
             text = update.text
-            language = 'en'
-    if update.chat.type == "supergroup" or "group":
+            language = DEFAULT_LANGUAGE
+    else:
         text = update.reply_to_message.text
         if " " in update.text:
             command, language = update.text.split(" | ", 1)
         else:
-            language = 'en'
-    else:
-        return
+            language = DEFAULT_LANGUAGE
     translator = Translator()
     await update.reply_chat_action("typing")
     message = await update.reply_text("`Translating...`")
