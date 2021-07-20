@@ -1,8 +1,8 @@
 # Made with python3
-# (C) @FayasNoushad
+# (C) @doreamonfans1
 # Copyright permission under MIT License
-# All rights reserved by FayasNoushad
-# License -> https://github.com/FayasNoushad/Translator-Bot/blob/main/LICENSE
+# All rights reserved by Doreamon Fans
+# License -> https://github.com/disneyteam76/Translator-Bot/blob/patch-1/LICENSE
 
 import os
 from io import BytesIO
@@ -18,22 +18,22 @@ FayasNoushad = Client(
 )
 
 START_TEXT = """
-Hello {}, I am a google translator telegram bot.
+Hello {}, I am a google translator telegram bot. As Disney Team | ml Project By @disneygrou And @disneygroubackup
 
-Made by @FayasNoushad
+Made by @doreamonfans2
 """
 HELP_TEXT = """
 - Just send a text with language code
 
-example :- `This is a sample text | ml`
+example :- `Disney Team | ml`
 
-Made by @FayasNoushad
+Made by @doreamonfans2
 """
 ABOUT_TEXT = """
 - **Bot :** `Translator Bot`
-- **Creator :** [Fayas](https://telegram.me/TheFayas)
-- **Channel :** [Fayas Noushad](https://telegram.me/FayasNoushad)
-- **Source :** [Click here](https://github.com/FayasNoushad/Translator-Bot)
+- **Creator :** [Doreamon Fans](https://telegram.me/Doreamonfans2)
+- **Channel :** [Disney Team](https://telegram.me/Disneygrou)
+- **Developer :** [Doreamon Fans 1](https://telegram.me/doreamonfans1)
 - **Language :** [Python3](https://python.org)
 - **Library :** [Pyrogram](https://pyrogram.org)
 - **Server :** [Heroku](https://heroku.com)
@@ -54,8 +54,8 @@ HELP_BUTTONS = InlineKeyboardMarkup(
     )
 ABOUT_BUTTONS = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('Channel', url='https://telegram.me/FayasNoushad'),
-        InlineKeyboardButton('Feedback', url='https://telegram.me/TheFayas')
+        InlineKeyboardButton('Channel', url='https://telegram.me/disneygrou'),
+        InlineKeyboardButton('Feedback', url='https://telegram.me/doreamonfans2')
         ],[
         InlineKeyboardButton('Home', callback_data='home'),
         InlineKeyboardButton('Help', callback_data='help'),
@@ -69,7 +69,7 @@ CLOSE_BUTTON = InlineKeyboardMarkup(
     )
 TRANSLATE_BUTTON = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
+        InlineKeyboardButton('👨‍🔧 Join Updates Channel 👨‍🔧', url='https://telegram.me/disneygrou')
         ]]
     )
 DEFAULT_LANGUAGE = os.environ.get("DEFAULT_LANGUAGE", "en")
@@ -124,12 +124,12 @@ async def translate(bot, update):
             language = DEFAULT_LANGUAGE
     translator = Translator()
     await update.reply_chat_action("typing")
-    message = await update.reply_text("`Translating...`")
+    message = await update.reply_text("`Translating 1 sec...`")
     try:
         translate = translator.translate(text, dest=language)
         translate_text = f"**Translated to {language}**"
         translate_text += f"\n\n{translate.text}"
-        translate_text += "\n\nMade by @FayasNoushad"
+        translate_text += "\n\nMade by @doreamonfans2"
         if len(translate_text) < 4096:
             await message.edit_text(
                 text=translate_text,
@@ -141,13 +141,13 @@ async def translate(bot, update):
                 translate_file.name = language + ".txt"
                 await update.reply_document(
                     document=translate_file,
-                    caption="Made by @FayasNoushad",
+                    caption="Made by @doreamonfans2",
                     reply_markup=TRANSLATE_BUTTON
                 )
                 await message.delete()
     except Exception as error:
         print(error)
-        await message.edit_text("Something wrong. Contact @TheFayas.")
+        await message.edit_text("Something wrong. Contact @doreamonfans2.")
         return
 
 FayasNoushad.run()
