@@ -20,20 +20,20 @@ FayasNoushad = Client(
 START_TEXT = """
 Hello {}, I am a google translator telegram bot.
 
-Made by @FayasNoushad
+Made by @dejen birhanu
 """
 HELP_TEXT = """
 - Just send a text with language code
 
 example :- `This is a sample text | ml`
 
-Made by @FayasNoushad
+Made by @dejen birhanu
 """
 ABOUT_TEXT = """
 - **Bot :** `Translator Bot`
-- **Creator :** [Fayas](https://telegram.me/TheFayas)
+- **Creator :** [dejen birhanu](https://telegram.me/dejen birhanu)
 - **Channel :** [Fayas Noushad](https://telegram.me/FayasNoushad)
-- **Source :** [Click here](https://github.com/FayasNoushad/Translator-Bot)
+- **Source :** [Click here](    Translator-Bot-V2 )
 - **Language :** [Python3](https://python.org)
 - **Library :** [Pyrogram](https://pyrogram.org)
 - **Server :** [Heroku](https://heroku.com)
@@ -69,12 +69,12 @@ CLOSE_BUTTON = InlineKeyboardMarkup(
     )
 TRANSLATE_BUTTON = InlineKeyboardMarkup(
         [[
-        InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
+        InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='dejen birhanu ')
         ]]
     )
-DEFAULT_LANGUAGE = os.environ.get("DEFAULT_LANGUAGE", "en")
+DEFAULT_LANGUAGE = os.environ.get("DEFAULT_LANGUAGE", "am")
 
-@FayasNoushad.on_callback_query()
+@dejen birhanu.on_callback_query()
 async def cb_data(bot, update):
     if update.data == "home":
         await update.message.edit_text(
@@ -98,7 +98,7 @@ async def cb_data(bot, update):
         await update.message.delete()
     
 
-@FayasNoushad.on_message(filters.command(["start"]))
+@dejen birhanu.on_message(filters.command(["start"]))
 async def start(bot, update):
     text = START_TEXT.format(update.from_user.mention)
     reply_markup = START_BUTTONS
@@ -129,7 +129,7 @@ async def translate(bot, update):
         translate = translator.translate(text, dest=language)
         translate_text = f"**Translated to {language}**"
         translate_text += f"\n\n{translate.text}"
-        translate_text += "\n\nMade by @FayasNoushad"
+        translate_text += "\n\nMade by @dejen birhanu"
         if len(translate_text) < 4096:
             await message.edit_text(
                 text=translate_text,
@@ -141,7 +141,7 @@ async def translate(bot, update):
                 translate_file.name = language + ".txt"
                 await update.reply_document(
                     document=translate_file,
-                    caption="Made by @FayasNoushad",
+                    caption="Made by @dejen birhanu",
                     reply_markup=TRANSLATE_BUTTON
                 )
                 await message.delete()
