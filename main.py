@@ -1,14 +1,9 @@
-# Made with python3
-# (C) @FayasNoushad
-# Copyright permission under MIT License
-# All rights reserved by FayasNoushad
-# License -> https://github.com/FayasNoushad/Translator-Bot/blob/main/LICENSE
-
 import os
 from io import BytesIO
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from googletrans import Translator
+
 
 Bot = Client(
     "Translator Bot",
@@ -17,11 +12,10 @@ Bot = Client(
     api_hash = os.environ["API_HASH"]
 )
 
-START_TEXT = """
-Hello {}, I am a google translator telegram bot.
+START_TEXT = """Hello {},
+I am a google translator telegram bot.
 
-Made by @FayasNoushad
-"""
+Made by @FayasNoushad"""
 HELP_TEXT = """
 - Just send a text with language code
 
@@ -29,49 +23,59 @@ example :- `This is a sample text | ml`
 
 Made by @FayasNoushad
 """
-ABOUT_TEXT = """
+ABOUT_TEXT = """**About Me**
+
 - **Bot :** `Translator Bot`
 - **Creator :** [Fayas](https://telegram.me/TheFayas)
 - **Channel :** [Fayas Noushad](https://telegram.me/FayasNoushad)
 - **Source :** [Click here](https://github.com/FayasNoushad/Translator-Bot)
 - **Language :** [Python3](https://python.org)
-- **Library :** [Pyrogram](https://pyrogram.org)
-- **Server :** [Heroku](https://heroku.com)
-"""
+- **Library :** [Pyrogram](https://pyrogram.org)"""
 START_BUTTONS = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton('Help', callback_data='help'),
-        InlineKeyboardButton('About', callback_data='about'),
-        InlineKeyboardButton('Close', callback_data='close')
-        ]]
-    )
+    [
+        [
+            InlineKeyboardButton('Help', callback_data='help'),
+            InlineKeyboardButton('About', callback_data='about'),
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
 HELP_BUTTONS = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton('Home', callback_data='home'),
-        InlineKeyboardButton('About', callback_data='about'),
-        InlineKeyboardButton('Close', callback_data='close')
-        ]]
-    )
+    [
+        [
+            InlineKeyboardButton('Home', callback_data='home'),
+            InlineKeyboardButton('About', callback_data='about'),
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
 ABOUT_BUTTONS = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton('Channel', url='https://telegram.me/FayasNoushad'),
-        InlineKeyboardButton('Feedback', url='https://telegram.me/TheFayas')
-        ],[
-        InlineKeyboardButton('Home', callback_data='home'),
-        InlineKeyboardButton('Help', callback_data='help'),
-        InlineKeyboardButton('Close', callback_data='close')
-        ]]
-    )
+    [
+        [
+            InlineKeyboardButton('Channel', url='https://telegram.me/FayasNoushad'),
+            InlineKeyboardButton('Feedback', url='https://telegram.me/TheFayas')
+        ],
+        [
+            InlineKeyboardButton('Home', callback_data='home'),
+            InlineKeyboardButton('Help', callback_data='help'),
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
 CLOSE_BUTTON = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton('Close', callback_data='close')
-        ]]
-    )
+    [
+        [
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
 TRANSLATE_BUTTON = InlineKeyboardMarkup(
-        [[
-        InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
-        ]]
-    )
+    [
+        [
+            InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
+        ]
+    ]
+)
 DEFAULT_LANGUAGE = os.environ.get("DEFAULT_LANGUAGE", "en")
 
 
@@ -121,7 +125,7 @@ async def translate(bot, update):
     else:
         text = update.reply_to_message.text
         if " " in update.text:
-            command, language = update.text.split(" | ", 1)
+            language = update.text.split(" | ", 1)[1]
         else:
             language = DEFAULT_LANGUAGE
     translator = Translator()
@@ -150,6 +154,6 @@ async def translate(bot, update):
     except Exception as error:
         print(error)
         await message.edit_text("Something wrong. Contact @TheFayas.")
-        return
+
 
 Bot.run()
