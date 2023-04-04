@@ -13,21 +13,19 @@ Bot = Client(
 )
 
 START_TEXT = """Hello {},
-I am a google translator telegram bot.
 
-Made by @FayasNoushad"""
+I am a google translator telegram bot."""
 HELP_TEXT = """
 - Just send a text with language code
 
 example :- `This is a sample text | ml`
-
-Made by @FayasNoushad
 """
 ABOUT_TEXT = """**About Me**
 
 - **Bot :** `Translator Bot`
-- **Creator :** [Fayas](https://telegram.me/TheFayas)
-- **Channel :** [Fayas Noushad](https://telegram.me/FayasNoushad)
+- **Developer :**
+  • [GitHub](https://github.com/FayasNoushad)
+  • [Telegram](https://telegram.me/FayasNoushad)
 - **Source :** [Click here](https://github.com/FayasNoushad/Translator-Bot)
 - **Language :** [Python3](https://python.org)
 - **Library :** [Pyrogram](https://pyrogram.org)"""
@@ -52,8 +50,7 @@ HELP_BUTTONS = InlineKeyboardMarkup(
 ABOUT_BUTTONS = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton('Channel', url='https://telegram.me/FayasNoushad'),
-            InlineKeyboardButton('Feedback', url='https://telegram.me/TheFayas')
+            InlineKeyboardButton('Feedback', url='https://telegram.me/FayasNoushad')
         ],
         [
             InlineKeyboardButton('Home', callback_data='home'),
@@ -72,7 +69,7 @@ CLOSE_BUTTON = InlineKeyboardMarkup(
 TRANSLATE_BUTTON = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton('⚙ Join Updates Channel ⚙', url='https://telegram.me/FayasNoushad')
+            InlineKeyboardButton("Feedback", url="https://telegram.me/FayasNoushad")
         ]
     ]
 )
@@ -134,8 +131,7 @@ async def translate(bot, update):
     try:
         translate = translator.translate(text, dest=language)
         translate_text = f"**Translated to {language}**"
-        translate_text += f"\n\n{translate.text}"
-        translate_text += "\n\nMade by @FayasNoushad"
+        translate_text += f"\n\n`{translate.text}`"
         if len(translate_text) < 4096:
             await message.edit_text(
                 text=translate_text,
@@ -147,7 +143,6 @@ async def translate(bot, update):
                 translate_file.name = language + ".txt"
                 await update.reply_document(
                     document=translate_file,
-                    caption="Made by @FayasNoushad",
                     reply_markup=TRANSLATE_BUTTON
                 )
                 await message.delete()
