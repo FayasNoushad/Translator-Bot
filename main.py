@@ -1,8 +1,8 @@
 import os
 from io import BytesIO
-from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from googletrans import Translator
+from pyrogram import Client, filters, enums
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 Bot = Client(
@@ -111,9 +111,9 @@ async def start(bot, update):
     )
 
 
-@Bot.on_message((filters.private | filters.group | ~filters.channel) & filters.text)
+@Bot.on_message(filters.text)
 async def translate(bot, update):
-    if update.chat.type == "private":
+    if update.chat.type == enums.ChatType.PRIVATE:
         if " | " in update.text:
             text, language = update.text.split(" | ", 1)
         else:
@@ -126,7 +126,6 @@ async def translate(bot, update):
         else:
             language = DEFAULT_LANGUAGE
     translator = Translator()
-    await update.reply_chat_action("typing")
     message = await update.reply_text("`Translating...`")
     try:
         translate = translator.translate(text, dest=language)
@@ -148,7 +147,7 @@ async def translate(bot, update):
                 await message.delete()
     except Exception as error:
         print(error)
-        await message.edit_text("Something wrong. Contact @TheFayas.")
+        await message.edit_text("Something wrong.")
 
 
 Bot.run()
