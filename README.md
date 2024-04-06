@@ -24,3 +24,7 @@ python3 main.py
 - `BOT_TOKEN` Your bot token from @BotFather
 
 ---
+
+### Use [Translator-Bot-V3](https://github.com/FayasNoushad/Translator-Bot-V3), it is the latest and best version with more features.
+
+---
